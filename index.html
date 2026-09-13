@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Tic-Tac-Toe game with AI and multiplayer options.">
+    <title>Tic-Tac-Toe Arena</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="gameCard" class="game-card ai-mode">
+        <header class="header">
+            <span class="badge">STRATEGIC PLAYGROUND</span>
+            <h1>Tic-Tac-Toe <span>Arena</span></h1>
+            <p>Precision play. Better decisions. Stronger results.</p>
+        </header>
+
+        <section class="settings-panel">
+            <div class="setting-group full-width">
+                <label>Game mode</label>
+                <div class="mode-buttons">
+                    <button id="aiModeBtn" class="mode-btn active" type="button">
+                        <span>🤖</span>
+                        <div>
+                            <strong>Play vs AI</strong>
+                            <small>Challenge the computer</small>
+                        </div>
+                    </button>
+
+                    <button id="friendsModeBtn" class="mode-btn" type="button">
+                        <span>👥</span>
+                        <div>
+                            <strong>Local Match</strong>
+                            <small>Two players, one device</small>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="setting-group ai-only" id="aiSettings">
+                <label for="difficulty">AI difficulty</label>
+                <select id="difficulty">
+                    <option value="easy">Easy • Relaxed</option>
+                    <option value="medium">Medium • Tactical</option>
+                    <option value="hard" selected>Hard • Minimax</option>
+                </select>
+            </div>
+
+            <div class="setting-group ai-only" id="symbolGroup">
+                <label>Your symbol</label>
+                <div class="symbol-buttons">
+                    <button class="symbol-btn active" type="button" data-symbol="X">X</button>
+                    <button class="symbol-btn" type="button" data-symbol="O">O</button>
+                </div>
+            </div>
+
+            <div class="setting-group full-width ai-only" id="aiStarterGroup">
+                <label for="starter">First move</label>
+                <select id="starter">
+                    <option value="you">You start</option>
+                    <option value="opponent">AI starts</option>
+                    <option value="random">Random</option>
+                </select>
+            </div>
+
+            <div class="setting-group full-width local-only hidden" id="localSettings">
+                <label for="localStarter">First move</label>
+                <select id="localStarter">
+                    <option value="player1">Player 1</option>
+                    <option value="player2">Player 2</option>
+                    <option value="random">Random</option>
+                </select>
+            </div>
+
+            <div class="setting-group full-width">
+                <label for="matchFormat">Match format</label>
+                <select id="matchFormat">
+                    <option value="1">Single round</option>
+                    <option value="3" selected>Best of 3</option>
+                    <option value="5">Best of 5</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="game-info">
+            <div class="round-info">
+                <span>ROUND</span>
+                <strong id="roundNumber">1</strong>
+            </div>
+
+            <div class="turn-message" id="turnMessage">
+                <span class="pulse"></span>
+                <span>Your turn — play X</span>
+            </div>
+
+            <button class="swap-btn" id="swapBtn" type="button">Swap</button>
+        </div>
+
+        <div class="score-board">
+            <div class="score-card player-card">
+                <span class="score-name" id="playerName">YOU</span>
+                <span class="score-symbol x-symbol" id="playerSymbol">X</span>
+                <strong class="score-value" id="playerScore">0</strong>
+            </div>
+
+            <div class="versus">VS</div>
+
+            <div class="score-card opponent-card">
+                <span class="score-name" id="opponentName">AI</span>
+                <span class="score-symbol o-symbol" id="opponentSymbol">O</span>
+                <strong class="score-value" id="opponentScore">0</strong>
+            </div>
+        </div>
+
+        <div class="match-progress">
+            <div class="progress-text">
+                <span id="matchText">Best of 3</span>
+                <span id="matchPointText">First to 2 wins</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="board" id="board">
+            <button class="cell" type="button" data-index="0"></button>
+            <button class="cell" type="button" data-index="1"></button>
+            <button class="cell" type="button" data-index="2"></button>
+
+            <button class="cell" type="button" data-index="3"></button>
+            <button class="cell" type="button" data-index="4"></button>
+            <button class="cell" type="button" data-index="5"></button>
+
+            <button class="cell" type="button" data-index="6"></button>
+            <button class="cell" type="button" data-index="7"></button>
+            <button class="cell" type="button" data-index="8"></button>
+        </div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <div class="setup-actions" id="setupActions">
+            <button id="startMatchBtn" class="primary-btn" type="button">Start Match</button>
+            <button id="resetSettingsBtn" class="secondary-btn" type="button">Reset Settings</button>
+        </div>
+
+        <div class="controls">
+            <button id="restartBtn" class="primary-btn" type="button">New Round</button>
+            <button id="newMatchBtn" class="secondary-btn" type="button">Reset Match</button>
+        </div>
+
+        <footer>
+            <span>Competitive AI</span>
+            <span>•</span>
+            <span>Professional match flow</span>
+        </footer>
+    </div>
+
+    <div id="gameModal" class="modal-overlay hidden" aria-live="polite">
+        <div class="modal-card">
+            <div class="modal-icon" id="modalIcon">🎯</div>
+            <h2 id="modalTitle">Ready to begin?</h2>
+            <p id="modalMessage">Set your match preferences and start when you are ready.</p>
+
+            <div class="modal-actions">
+                <button id="primaryModalBtn" class="primary-btn modal-btn" type="button">Start Match</button>
+                <button id="secondaryModalBtn" class="secondary-btn modal-btn" type="button">Reset Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="celebrationLayer" class="celebration-layer" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
