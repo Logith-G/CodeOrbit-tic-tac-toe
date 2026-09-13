@@ -1,6 +1,9 @@
 ## 🚀 Live Demo
 
 [🎮 Play Tic-Tac-Toe Arena](https://logith-g.github.io/CodeOrbit-tic-tac-toe/)
+## 📂 Source Code
+
+[View the source code on GitHub](https://github.com/Logith-G/CodeOrbit-tic-tac-toe.git)
 
 # 🎮 Tic-Tac-Toe Arena
 
