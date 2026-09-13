@@ -1,3 +1,7 @@
+## 🚀 Live Demo
+
+[🎮 Play Tic-Tac-Toe Arena](https://logith-g.github.io/CodeOrbit-tic-tac-toe/)
+
 # 🎮 Tic-Tac-Toe Arena
 
 A modern browser-based Tic-Tac-Toe game built as part of the **CodeOrbit Internship**.  
